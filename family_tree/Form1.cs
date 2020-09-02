@@ -20,7 +20,7 @@ namespace family_tree
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBoxAD.Text == "" || textBoxsoyad.Text == "" || textBoxbabaad.Text == "" || textBoxbbsoyad.Text == "" || textBoxannead.Text == "" || textBoxannesoyad.Text == "") {
+            if (txtAdSoyad.Text == "" || txtBabaAdSoyad.Text == "" || txtAnneAdSoyad.Text == "") {
                 MessageBox.Show("Lütfen bilgileri eksiksiz girin...");
             }
             else
@@ -28,20 +28,58 @@ namespace family_tree
                 string yol = "Data source=dbapps.db";
                 SQLiteConnection con = new SQLiteConnection(yol);
                 con.Open();
-                string sql = "insert into Person(Ad,Soyad,Babaad,Babasoyad,Annead,Annesoyad) values(@Ad,@Soyad,@Babaad,@Babasoyad,@annead,@Annesoyad)";
+                string sql = "insert into Person(AdSoyad,BabaadSoyad,AnneadSoyad) values(@AdSoyad,@BabaadSoyad,@AnneadSoyad)";
                 SQLiteCommand cmd = new SQLiteCommand(sql, con);
-                cmd.Parameters.AddWithValue("@Ad", textBoxAD.Text);
-                cmd.Parameters.AddWithValue("@Soyad", textBoxsoyad.Text);
-                cmd.Parameters.AddWithValue("@Babaad", textBoxbabaad.Text);
-                cmd.Parameters.AddWithValue("@Babasoyad", textBoxbbsoyad.Text);
-                cmd.Parameters.AddWithValue("@Annead", textBoxannead.Text);
-                cmd.Parameters.AddWithValue("@Annesoyad", textBoxannesoyad.Text);
+                cmd.Parameters.AddWithValue("@AdSoyad", txtAdSoyad.Text);
+                cmd.Parameters.AddWithValue("@BabaadSoyad", txtBabaAdSoyad.Text);
+                cmd.Parameters.AddWithValue("@AnneadSoyad", txtAnneAdSoyad.Text);
+                
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Veriler Kaydedildi...");
+                con.Close();
+
+                SQLiteCommand cmt = new SQLiteCommand();
+                cmt.CommandText = "select * from Person";
+                cmt.Connection = con;
+                cmt.CommandType = CommandType.Text;
+                SQLiteDataReader dr;
+                con.Open();
+                dr = cmt.ExecuteReader();
+                while (dr.Read())
+                {
+                    comboBox1.Items.Add(dr["BabaadSoyad"]);
+                   
+
+                }
+                con.Close();
             }
 
+           
+            
 
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string yol = "Data source=dbapps.db";
+            SQLiteConnection con = new SQLiteConnection(yol);
+            SQLiteCommand cmt = new SQLiteCommand();
+            cmt.CommandText = "select * from Person";
+            cmt.Connection = con;
+            cmt.CommandType = CommandType.Text;
+            SQLiteDataReader dr;
+            con.Open();
+            dr = cmt.ExecuteReader();
+            while (dr.Read())
+            {
+                comboBox1.Items.Add(dr["BabaadSoyad"]);
+                
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             
         }
     }
