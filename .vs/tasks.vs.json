@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-sqlite_db",
+      "appliesTo": "family_tree/db/sqlite_db.sqbpro",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-family_tree_db",
+      "appliesTo": "family_tree/db/family_tree_db.s3db",
+      "type": "launch"
+    }
+  ]
+}
