@@ -39,6 +39,10 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -109,12 +113,18 @@
             // 
             // listView1
             // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(12, 211);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(694, 497);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // comboBox1
             // 
@@ -145,6 +155,25 @@
             this.button2.Text = "Soy ağacı getir";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "İd";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Ad Soyad";
+            this.columnHeader2.Width = 126;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Baba Ad Soyad";
+            this.columnHeader3.Width = 142;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Anne Ad Soyad";
+            this.columnHeader4.Width = 166;
             // 
             // Form1
             // 
@@ -187,6 +216,10 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 

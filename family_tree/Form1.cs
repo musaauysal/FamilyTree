@@ -17,7 +17,7 @@ namespace family_tree
         {
             InitializeComponent();
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             if (txtAdSoyad.Text == "" || txtBabaAdSoyad.Text == "" || txtAnneAdSoyad.Text == "") {
@@ -80,7 +80,33 @@ namespace family_tree
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string yol = "Data source=dbapps.db";
+            SQLiteConnection con = new SQLiteConnection(yol);
+            con.Open();
+            SQLiteCommand cmt = new SQLiteCommand("select id from Person where BabaadSoyad =@BabaadSoyad",con);
+            cmt.Parameters.AddWithValue("@BabaadSoyad", comboBox1.SelectedItem.ToString());
+            cmt.ExecuteNonQuery();
+            SQLiteDataReader dr = cmt.ExecuteReader();
+            dr.Read();
+            string id = dr["id"].ToString();
             
+            con.Close();
+
+            con.Open();
+
+            SQLiteCommand cmd = new SQLiteCommand("select * from Person where id=@id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            SQLiteDataReader dr1 = cmd.ExecuteReader();
+            while (dr1.Read())
+            {
+                ListViewItem item = new ListViewItem(dr1["id"].ToString());
+                item.SubItems.Add(dr1["AdSoyad"].ToString());
+                item.SubItems.Add(dr1["BabaadSoyad"].ToString());
+                item.SubItems.Add(dr1["AnneadSoyad"].ToString());
+                listView1.Items.Add(item);
+            }
+            con.Close();
         }
     }
 }
